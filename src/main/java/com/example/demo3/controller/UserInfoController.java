@@ -11,17 +11,25 @@ public class UserInfoController {
     final UserInfoService userInfoService;
 
     public UserInfoController(UserInfoService userInfoService) {
+
         this.userInfoService = userInfoService;
     }
 
-    @GetMapping("/userinfo")
+    @PostMapping("/userinfo")
     public UserInfoDto createUserInfo(@RequestBody UserInfoDto userInfoDto){
         userInfoService.createUserInfo(userInfoDto);
         return userInfoDto;
     }
 
-    @PostMapping("/userinfo/{name}")
+    @GetMapping("/userinfo/{name}")
     public UserInfoDto selectUserInfo(@PathVariable String name){
+
         return userInfoService.selectUserInfo(name);
+    }
+
+    @PutMapping("/userinfo/{name}")
+    public UserInfoDto updateUserInfo(@PathVariable String name, @RequestBody UserInfoDto userInfoDto){
+
+        return userInfoService.updateUserInfo(name,userInfoDto);
     }
 }

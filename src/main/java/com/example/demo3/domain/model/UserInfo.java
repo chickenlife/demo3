@@ -17,4 +17,5 @@ public class UserInfo {
 
     @Column(name="age")
     private int age;
+
 }
