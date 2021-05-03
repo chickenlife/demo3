@@ -17,12 +17,11 @@ public class UserInfoService {
     }
 
     public UserInfoDto selectUserInfo(String name) {
+        UserInfo userInfo = userInfoDomainService.getUserInfo(name);
         UserInfoDto userInfoDto = new UserInfoDto();
-        UserInfo userinfo = userInfoDomainService.getUserInfo(name)
-                .orElseThrow(()->new RuntimeException("Not Found User["+name+"]'s UserInfo"));
-
-        userInfoDto.setName(userinfo.getName());
-        userInfoDto.setAge(userinfo.getAge());
+        userInfoDto.setId(userInfo.getId());
+        userInfoDto.setName(userInfo.getName());
+        userInfoDto.setAge(userInfo.getAge());
 
         return userInfoDto;
     }

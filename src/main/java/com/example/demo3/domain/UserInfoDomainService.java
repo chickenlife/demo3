@@ -18,9 +18,11 @@ public class UserInfoDomainService {
     private final UserInfoRepository userInfoRepository;
 
     @Transactional
-    public Optional<UserInfo> getUserInfo(String name) {
-
-        return userInfoRepository.findByName(name);
+    public UserInfo getUserInfo(String name) {
+        Optional<UserInfo> userInfo = userInfoRepository.findByName(name);
+        if(!userInfo.isPresent())
+            throw new RuntimeException("findByName, not found :"+name);
+        return userInfo.get();
     }
 
     @Transactional
@@ -31,13 +33,16 @@ public class UserInfoDomainService {
 
     @Transactional
     public void updateUserInfo(UserInfo userInfo) {
-        Optional<UserInfo> userinfo1 = userInfoRepository.findById(userInfo.getId());
-        log.debug("userinfo1.getId() : "+ userinfo1.get().getId());
-        log.debug("userinfo1.getName() : "+ userinfo1.get().getName());
-        log.debug("userinfo1.getAge() : "+ userinfo1.get().getAge());
-        userinfo1.get().setId(userInfo.getId());
-        userinfo1.get().setName(userInfo.getName());
-        userinfo1.get().setAge(userInfo.getAge());
-        userInfoRepository.save(userinfo1.get());
+        log.debug("userInfo.getId() : "+ userInfo.getId());
+        UserInfo userinfo1 = userInfoRepository.findById(userInfo.getId())
+                .orElseThrow(()-> new RuntimeException("not found"));
+
+        log.debug("userinfo1.getId() : "+ userinfo1.getId());
+        log.debug("userinfo1.getName() : "+ userinfo1.getName());
+        log.debug("userinfo1.getAge() : "+ userinfo1.getAge());
+        userinfo1.setId(userInfo.getId());
+        userinfo1.setName(userInfo.getName());
+        userinfo1.setAge(userInfo.getAge());
+        userInfoRepository.save(userinfo1);
     }
 }
