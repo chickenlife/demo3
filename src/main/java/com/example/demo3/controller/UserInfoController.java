@@ -2,10 +2,7 @@ package com.example.demo3.controller;
 
 import com.example.demo3.dto.UserInfoDto;
 import com.example.demo3.service.UserInfoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -17,9 +14,14 @@ public class UserInfoController {
         this.userInfoService = userInfoService;
     }
 
+    @GetMapping("/userinfo")
+    public UserInfoDto createUserInfo(@RequestBody UserInfoDto userInfoDto){
+        userInfoService.createUserInfo(userInfoDto);
+        return userInfoDto;
+    }
+
     @PostMapping("/userinfo/{name}")
     public UserInfoDto selectUserInfo(@PathVariable String name){
-
         return userInfoService.selectUserInfo(name);
     }
 }

@@ -23,4 +23,13 @@ public class UserInfoService {
 
         return userInfoDto;
     }
+
+    public UserInfoDto createUserInfo(UserInfoDto userInfoDto) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setName(userInfoDto.getName());
+        userInfo.setAge(userInfoDto.getAge());
+
+        userInfoDomainService.createUserInfo(userInfo);
+        return userInfoDto;
+    }
 }

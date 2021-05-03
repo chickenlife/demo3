@@ -16,6 +16,12 @@ public class UserInfoDomainService {
 
     @Transactional
     public Optional<UserInfo> getUserInfo(String name) {
+
         return userInfoRepository.findByName(name);
+    }
+
+    @Transactional
+    public void createUserInfo(UserInfo userInfo) {
+        userInfoRepository.save(userInfo);
     }
 }
