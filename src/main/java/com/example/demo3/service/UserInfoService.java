@@ -32,6 +32,7 @@ public class UserInfoService {
         userInfo.setAge(userInfoDto.getAge());
 
         userInfoDomainService.createUserInfo(userInfo);
+        //리턴 값 변경해야함. id가 무조건 0으로 넘어감
         return userInfoDto;
     }
 
@@ -44,5 +45,10 @@ public class UserInfoService {
         log.debug("userInfo created, id:"+userInfoDto.getId());
         userInfoDomainService.updateUserInfo(userInfo);
         return userInfoDto;
+    }
+
+    public void deleteUserInfo(String name) {
+
+        userInfoDomainService.deleteUserInfo(name);
     }
 }

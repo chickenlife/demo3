@@ -45,4 +45,9 @@ public class UserInfoDomainService {
         userinfo1.setAge(userInfo.getAge());
         userInfoRepository.save(userinfo1);
     }
+
+    @Transactional
+    public void deleteUserInfo(String name) {
+        userInfoRepository.deleteByName(name);
+    }
 }

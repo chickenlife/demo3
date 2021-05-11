@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface UserInfoRepository extends JpaRepository<UserInfo,Long> {
     Optional<UserInfo> findByName(String name);
+
+    void deleteByName(String name);
 }

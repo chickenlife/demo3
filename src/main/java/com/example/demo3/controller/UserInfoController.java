@@ -32,4 +32,11 @@ public class UserInfoController {
 
         return userInfoService.updateUserInfo(name,userInfoDto);
     }
+
+    @DeleteMapping("/userinfo/{name}")
+    public String deleteUserInfo(@PathVariable String name){
+
+        userInfoService.deleteUserInfo(name);
+        return "deleted "+name;
+    }
 }
