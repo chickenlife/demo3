@@ -28,11 +28,17 @@ public class UserInfoService {
 
     public UserInfoDto createUserInfo(UserInfoDto userInfoDto) {
         UserInfo userInfo = new UserInfo();
+        log.debug("userInfoDto.getId():"+userInfoDto.getId());
+        userInfo.setId(userInfoDto.getId());
         userInfo.setName(userInfoDto.getName());
         userInfo.setAge(userInfoDto.getAge());
 
-        userInfoDomainService.createUserInfo(userInfo);
-        //리턴 값 변경해야함. id가 무조건 0으로 넘어감
+        userInfo = userInfoDomainService.createUserInfo(userInfo);
+
+        userInfoDto.setId(userInfo.getId());
+        userInfoDto.setName(userInfo.getName());
+        userInfoDto.setAge(userInfo.getAge());
+
         return userInfoDto;
     }
 

@@ -26,9 +26,9 @@ public class UserInfoDomainService {
     }
 
     @Transactional
-    public void createUserInfo(UserInfo userInfo) {
-
-        userInfoRepository.save(userInfo);
+    public UserInfo createUserInfo(UserInfo userInfo) {
+        userInfo = userInfoRepository.save(userInfo);
+        return userInfo;
     }
 
     @Transactional

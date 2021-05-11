@@ -17,8 +17,8 @@ public class UserInfoController {
 
     @PostMapping("/userinfo")
     public UserInfoDto createUserInfo(@RequestBody UserInfoDto userInfoDto){
-        userInfoService.createUserInfo(userInfoDto);
-        return userInfoDto;
+
+        return userInfoService.createUserInfo(userInfoDto);
     }
 
     @GetMapping("/userinfo/{name}")
